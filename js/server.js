@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '..')));
 
 const PORT = process.env.PORT || 3000;
 const TO_EMAIL = process.env.TO_EMAIL || 'biswasabin6@gmail.com';
@@ -45,6 +45,6 @@ app.post('/send', async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'index.html')));
 
 app.listen(PORT, () => console.log(`Email server running on http://localhost:${PORT}`));
