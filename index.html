@@ -55,7 +55,7 @@
         }
 
         section {
-            padding: 100px 0;
+            padding: 50px 0;
         }
 
         .section-title {
@@ -111,6 +111,12 @@
             z-index: 1000;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--light-color);
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(0);
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
         }
 
         nav {
@@ -157,7 +163,7 @@
 
         /* Hero Section */
         .hero {
-            height: 100vh;
+            height: 80vh;
             display: flex;
             align-items: center;
             background: linear-gradient(135deg, var(--darker-color) 0%, var(--dark-color) 100%);
@@ -289,6 +295,14 @@
             color: var(--text-light);
             box-shadow: var(--shadow);
             border: 3px solid var(--primary-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .image-placeholder:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+            border-color: var(--secondary-color);
         }
 
         .profile-img {
@@ -301,6 +315,14 @@
             box-shadow: var(--shadow);
             background-color: var(--lighter-color);
             border: 3px solid var(--primary-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .profile-img:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+            border-color: var(--secondary-color);
         }
 
         /* Skills Section */
@@ -318,10 +340,14 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid var(--lighter-color);
+            cursor: pointer;
         }
 
         .skill-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+            border-color: var(--primary-color);
+            background-color: rgba(0, 212, 255, 0.05);
         }
 
         .skill-icon {
@@ -354,10 +380,13 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             border: 1px solid var(--lighter-color);
+            cursor: pointer;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+            border-color: var(--primary-color);
         }
 
         .project-image {
@@ -465,6 +494,15 @@
             border-radius: 15px;
             box-shadow: var(--shadow);
             border: 1px solid var(--lighter-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+            border-color: var(--primary-color);
+            background-color: rgba(0, 212, 255, 0.05);
         }
 
         .timeline-content h3 {
@@ -1153,6 +1191,25 @@
                 link.addEventListener('click', function() {
                     navLinks.classList.remove('active');
                 });
+            });
+            
+            // Header Hide/Show on Scroll
+            const header = document.querySelector('header');
+            let lastScrollPosition = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScrollPosition = window.scrollY;
+                
+                // Hide header when scrolling down, show when scrolling up
+                if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
+                    // Scrolling down
+                    header.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    header.classList.remove('hidden');
+                }
+                
+                lastScrollPosition = currentScrollPosition;
             });
             
             // Scroll Animation
